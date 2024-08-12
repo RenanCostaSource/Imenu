@@ -18,7 +18,8 @@ data class MenuListActions(
     val onDismiss: () -> Unit = {},
     val onIncrease: () -> Unit = {},
     val onDecrease: () -> Unit = {},
-    val onAddToCart: () -> Unit = {}
+    val onAddToCart: () -> Unit = {},
+    val onOpenShoppingCart: () -> Unit = {}
 )
 
 

@@ -4,16 +4,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.navigation.NavHostController
+import costa.renan.imenu.presentation.ui.navigation.Destinations
+import costa.renan.imenu.presentation.ui.view.shoppingcart.shoppingcart.ShoppingCartCoordinator
 
 @Composable
 fun MenuListRoute(
+    navController: NavHostController,
     coordinator: MenuListCoordinator = rememberMenuListCoordinator()
 ) {
     // State observing and declarations
     val uiState by coordinator.uiState.collectAsState(MenuListState())
 
     // UI Actions
-    val actions = rememberMenuListActions(coordinator)
+    val actions = rememberMenuListActions(navController, coordinator)
 
     // UI Rendering
     MenuListScreen(uiState, actions)
@@ -21,8 +25,11 @@ fun MenuListRoute(
 
 
 @Composable
-fun rememberMenuListActions(coordinator: MenuListCoordinator): MenuListActions {
-    return remember(coordinator) {
+fun rememberMenuListActions(
+    navController: NavHostController,
+    coordinator: MenuListCoordinator
+): MenuListActions {
+    return remember(navController, coordinator) {
         MenuListActions(
             onOpen = {
                 coordinator.viewModel.getMenuList()
@@ -31,9 +38,8 @@ fun rememberMenuListActions(coordinator: MenuListCoordinator): MenuListActions {
             onDismiss = { coordinator.viewModel.closeSheet() },
             onIncrease = { coordinator.viewModel.increaseAmount() },
             onDecrease = { coordinator.viewModel.decreaseAmount() },
-            onAddToCart = {
-                //TODO
-            }
+            onAddToCart = {},
+            onOpenShoppingCart = { navController.navigate(Destinations.shoppingCart) }
         )
     }
 }

@@ -18,12 +18,10 @@ class GetMenuListUseCase @Inject constructor(
             if (response.isSuccessful) {
                 emit(RemoteDataState.Success(data = body?.toDomain()))
             } else {
-                Log.e("GETMENU", response.message())
                 emit(RemoteDataState.Error(message = response.message()))
             }
 
         } catch (e: Exception) {
-            Log.e("GETMENU", e.message, e)
             emit(RemoteDataState.Error(message = e.message ?: "Unknown error"))
         }
     }

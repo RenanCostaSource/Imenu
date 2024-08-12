@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import costa.renan.imenu.presentation.ui.navigation.Destinations
-import costa.renan.imenu.presentation.ui.view.shoppingcart.shoppingcart.ShoppingCartCoordinator
 
 @Composable
 fun MenuListRoute(
@@ -33,12 +32,16 @@ fun rememberMenuListActions(
         MenuListActions(
             onOpen = {
                 coordinator.viewModel.getMenuList()
+                coordinator.viewModel.updateCartSize()
             },
             onSelect = { item -> coordinator.viewModel.openSheet(item) },
             onDismiss = { coordinator.viewModel.closeSheet() },
             onIncrease = { coordinator.viewModel.increaseAmount() },
             onDecrease = { coordinator.viewModel.decreaseAmount() },
-            onAddToCart = {},
+            onAddToCart = {
+                coordinator.viewModel.addToCart()
+                coordinator.viewModel.closeSheet()
+            },
             onOpenShoppingCart = { navController.navigate(Destinations.shoppingCart) }
         )
     }

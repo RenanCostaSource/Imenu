@@ -7,11 +7,12 @@ data class ShoppingCartState(
 )
 
 data class ShoppingCartActions(
-    val onSave: () -> Unit = {},
+    val onOpen: () -> Unit = {},
+    val onBuy: () -> Unit = {},
     val onDismiss: () -> Unit = {},
-    val onIncrease: (MenuListItem) -> Unit = {},
-    val onDecrease: (MenuListItem) -> Unit = {},
-    val onRemove: (MenuListItem) -> Unit = {},
+    val onIncrease: (Pair<MenuListItem, Int>) -> Unit = {},
+    val onDecrease: (Pair<MenuListItem, Int>) -> Unit = {},
+    val onRemove: (Pair<MenuListItem, Int>) -> Unit = {},
 )
 
 

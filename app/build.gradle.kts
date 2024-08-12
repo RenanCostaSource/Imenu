@@ -61,8 +61,13 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.accompanist.systemuicontroller)
+
+    //ROOM
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     annotationProcessor(libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler.v252)
 
     //COMPOSE
     val composeBom = platform("androidx.compose:compose-bom:2024.06.00")

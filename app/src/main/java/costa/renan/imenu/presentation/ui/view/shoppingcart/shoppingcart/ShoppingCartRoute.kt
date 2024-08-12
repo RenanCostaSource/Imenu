@@ -28,7 +28,17 @@ fun rememberShoppingCartActions(
 ): ShoppingCartActions {
     return remember(navController, coordinator) {
         ShoppingCartActions(
+            onOpen = {
+                coordinator.viewModel.getCartItems()
+            },
             onDismiss = { navController.popBackStack() },
+            onBuy = {
+                coordinator.viewModel.buy()
+                navController.popBackStack()
+            },
+            onIncrease = { coordinator.viewModel.increase(it) },
+            onDecrease = { coordinator.viewModel.decrease(it) },
+            onRemove = { coordinator.viewModel.delete(it) },
         )
     }
 }

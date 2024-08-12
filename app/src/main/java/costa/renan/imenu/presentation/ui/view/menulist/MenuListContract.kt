@@ -8,7 +8,8 @@ data class MenuListState(
     val errorMessage: String = "",
     var openSheet: Boolean = false,
     var sheetItem: MenuListItem? = null,
-    var amount: Int = 1
+    var amount: Int = 1,
+    var cartSize: Int = 0
 )
 
 data class MenuListActions(

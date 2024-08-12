@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -24,7 +22,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.LineBreak
@@ -38,9 +35,9 @@ import costa.renan.imenu.utils.extensions.formatCurrency
 fun CartItem(
     modifier: Modifier = Modifier,
     cartListItem: Pair<MenuListItem, Int>,
-    onDelete: (MenuListItem) -> Unit = {},
-    onIncrease: (MenuListItem) -> Unit = {},
-    onDecrease: (MenuListItem) -> Unit = {}
+    onDelete: (Pair<MenuListItem, Int>) -> Unit = {},
+    onIncrease: (Pair<MenuListItem, Int>) -> Unit = {},
+    onDecrease: (Pair<MenuListItem, Int>) -> Unit = {}
 ) {
     val menuListItem = cartListItem.first
     val amount = cartListItem.second
@@ -77,7 +74,7 @@ fun CartItem(
                         Text(
                             text = "-",
                             modifier = Modifier
-                                .clickable { onDecrease(menuListItem) }
+                                .clickable { onDecrease(cartListItem) }
                                 .width(IntrinsicSize.Max),
                             color = MaterialTheme.colorScheme.primary,
                             fontSize = 16.sp
@@ -88,7 +85,7 @@ fun CartItem(
                             contentDescription = "Delete",
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier
-                                .clickable { onDelete(menuListItem) }
+                                .clickable { onDelete(cartListItem) }
                                 .size(16.dp),
                         )
                     }
@@ -96,7 +93,7 @@ fun CartItem(
                     Text(
                         text = "+",
                         modifier = Modifier
-                            .clickable { onIncrease(menuListItem) }
+                            .clickable { onIncrease(cartListItem) }
                             .width(IntrinsicSize.Max),
                         color = MaterialTheme.colorScheme.primary,
                         fontSize = 16.sp
@@ -118,7 +115,7 @@ private fun PreviewMenuItem() {
         Pair(
             MenuListItem(
                 imageURL = "https://goldbelly.imgix.net/uploads/showcase_media_asset/image/66752/carolina-bbq-oink-sampler.1340b5a10cedc238cb2280306dd1d5a5.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1",
-                name = "Joe's BBQ realyyyyyyy long fooooorrr realllllllll",
+                name = "Joe's BBQ reallyyyyyyy long fooooorrr realllllllll",
                 description = "really big description to test how it lookssssssssssss",
                 price = 20f,
                 rate = 1
